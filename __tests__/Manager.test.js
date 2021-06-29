@@ -9,6 +9,7 @@ test('create a manager object', () => {
     expect(manager.name).toBe('Ben');
     expect(manager.officeNumber).toBe(204);
     expect(manager.id).toBeDefined();
-    expect(manager.email).toBe(`${manager.name}@company.com`);
+    expect(manager.email).toMatch(/@/);
+    expect(manager.email).toMatch(/.com/);
     expect(manager.role).toBe('Manager');
 })
