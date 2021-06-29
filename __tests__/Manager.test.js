@@ -3,7 +3,7 @@ const Manager = require('../lib/Manager');
 const { expect } = require('@jest/globals');
 
 test('create a manager object', () => {
-    const manager = new Manager('Ben', 204);
+    const manager = new Manager('Ben','ben@company.com', 204, 1234);
     console.table(manager);
 
     expect(manager.name).toBe('Ben');
