@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
-// const { writeFile, copyFile } = require('./utils/generate-site.js');
-// const generatePage = require('./src/page-template');
+const { writeFile, copyFile } = require('./generate-site.js');
+const generatePage = require('./src/page-template');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -101,37 +101,6 @@ Profile.prototype.newProfile = function() {
         })
 };
 
-
-
-// Profile.prototype.promptManager = function() {
-//     return inquirer
-//         .prompt([
-//             {
-//                 type: 'input',
-//                 name: 'name',
-//                 message: `Enter the team manager's name:`
-//             },
-//             {
-//                 type: 'input',
-//                 name: 'email',
-//                 message: `Enter the team manager's email:`
-//             },
-//             {
-//                 type: 'number',
-//                 name: 'officeNumber',
-//                 message: `Enter the team manager's office number:`
-//             },
-//             {
-//                 type: 'number',
-//                 name: 'id',
-//                 message: `Enter the team manager's employee ID:`
-//             }
-//         ])
-//         .then(({name, email, officeNumber, id}) => {
-//             this.employees.push(new Manager(name, email, officeNumber, id));
-//         })
-// };
-
 Profile.prototype.promptAction = function() {
     return inquirer
         .prompt([
@@ -149,8 +118,10 @@ Profile.prototype.promptAction = function() {
                 this.promptIntern();
             } else {
                 console.log('generating page');
-                this.employees.map(console.log(this));
-                //insert generateProfile function call here
+                console.log(this.employees);
+                console.log(this.employees.filter(employee => employee.role === 'Manager'));
+                // return generatePage(this.employees);
+                return this.employees;
             }
         })
 }
