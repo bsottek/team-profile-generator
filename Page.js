@@ -96,9 +96,8 @@ Profile.prototype.newProfile = function() {
         ])
         .then(({ name, email, officeNumber, id }) => {
             this.employees.push(new Manager(name, email, officeNumber, id));
-            console.log(this.employees);
             this.promptAction();
-        })
+        });
 };
 
 Profile.prototype.promptAction = function() {
@@ -119,10 +118,16 @@ Profile.prototype.promptAction = function() {
             } else {
                 console.log('generating page');
                 console.log(this.employees);
-                console.log(this.employees.filter(employee => employee.role === 'Manager'));
-                // return generatePage(this.employees);
-                return this.employees;
+                // console.log(this.employees.filter(employee => employee.role === 'Manager'));
+                return generatePage(this.employees);
+                // return this.employees;
             }
+        })
+        .then(pageHTML => {
+            return writeFile(pageHTML);
+        })
+        .then(writeFileResponse => {
+            console.log(writeFileResponse);
         })
 }
 

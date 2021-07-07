@@ -2,7 +2,7 @@
 const generatePage = (employees) => {
     // destructure page data by section
     // const { projects, about, ...header } = templateData;
-
+    console.log('generatePage is working');
     return `
         <!DOCTYPE html>
   <html lang="en">
