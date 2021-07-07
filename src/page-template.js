@@ -22,18 +22,19 @@ const generatePage = (employees) => {
     href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
 <link rel="stylesheet" href="./assets/css/style.css" />
 
-    <title>Weather Dashboard</title>
+    <title>Team Profile</title>
 </head>
 
 <body>
 <div class="container-fluid m-2">
     <div class="row">
-        <header class="col-12 bg-dark text-light">
+        <header class="col-12 bg-primary text-light">
             <h2 class="text-center p-3">
                 Team Profile
             </h2>
         </header>
-    <div class="row">
+    </div>
+    <div class="row p-3 d-flex justify-content-around">
         ${generateManager(employees)}
         ${generateEngineer(employees)}
         ${generateIntern(employees)}
@@ -52,16 +53,16 @@ const generateManager = employees => {
         .filter(employee => employee.role === 'Manager')
         .map(({name, id, email, role, officeNumber}) => {
             return `
-        <div class = "col-2, card, text-white, bg-dark, mr-2, mt-2">
-            <div class= "card-header">
-                ${name}
-                ${role}
+        <div class = "col-3 card bg-light  mt-2 ml-2">
+            <div class= "card-header bg-dark text-white">
+                ${name} <br>
+                <span class="oi oi-bullhorn">${role}</span>
             </div>
-            <ul>
-                <li> Email: ${email} </li>
-                <li> Office Number: ${officeNumber} </li>
-                <li> ID: ${id} </li>
-            <ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"> Email: <a href="mailto:${email}">${email}</a> </li>
+                <li class="list-group-item"> Office Number: ${officeNumber} </li>
+                <li class="list-group-item"> ID: ${id} </li>
+            </ul>
         </div>`;
         })}`;
 }
@@ -72,16 +73,16 @@ const generateEngineer = employees => {
             .filter(employee => employee.role === 'Engineer')
             .map(({ name, id, email, role, github }) => {
                 return `
-        <div class = "col-2, card, text-white, bg-dark, mr-2, mt-2">
-            <div class= "card-header">
-                ${name}
-                ${role}
+        <div class = "col-3 card bg-light  mt-2 ml-2">
+            <div class= "card-header bg-warning text-white">
+                ${name} <br>
+                <span class="oi oi-wrench">${role}</span>
             </div>
-            <ul>
-                <li> Email: ${email} </li>
-                <li> GitHub Username: ${github} </li>
-                <li> ID: ${id} </li>
-            <ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"> Email: <a href="mailto:${email}">${email}</a> </li>
+                <li class="list-group-item"> GitHub Username: <a target="_blank" rel="noopener noreferrer" href="https://github.com/${github}">${github}</a> </li>
+                <li class="list-group-item"> ID: ${id} </li>
+            </ul>
         </div>`;
             })}`;
 }
@@ -92,16 +93,16 @@ const generateIntern = employees => {
             .filter(employee => employee.role === 'Intern')
             .map(({ name, id, email, role, school }) => {
                 return `
-        <div class = "col-2, card, text-white, bg-dark, mr-2, mt-2">
-            <div class= "card-header">
-                ${name}
-                ${role}
+        <div class = "col-3 card bg-light  mt-2 ml-2">
+            <div class= "card-header bg-info text-white">
+                ${name} <br>
+                <span class="oi oi-pencil">${role}</span>
             </div>
-            <ul>
-                <li> Email: ${email} </li>
-                <li> School: ${school} </li>
-                <li> ID: ${id} </li>
-            <ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"> Email: <a href="mailto:${email}">${email}</a> </li>
+                <li class="list-group-item"> School: ${school} </li>
+                <li class="list-group-item"> ID: ${id} </li>
+            </ul>
         </div>`;
             })}`;
 }
