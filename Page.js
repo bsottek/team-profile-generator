@@ -117,27 +117,23 @@ Profile.prototype.promptAction = function() {
             } else if (actionSelection == 'Enter intern details'){
                 return(this.promptIntern());
             } else {
-                console.log('generating page');
-                console.log(this.employees);
-                return(generatePage(this.employees)
-                    .then(writeFileResponse => {
-                        console.log(writeFileResponse.message);
-                        return copyFile();
-                    })
-                    .then(copyFileResponse => {
-                        console.log(copyFileResponse);
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    }));
+                return this.fileGeneration(this.employees);
             }
         })
-        // .then(writeFileResponse => {
-        //     console.log(writeFileResponse);
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        // })
+}
+
+Profile.prototype.fileGeneration = function(employees) {
+    return generatePage(employees)
+        .then(writeFileResponse => {
+            console.log(writeFileResponse.message);
+            return copyFile();
+        })
+        .then(copyFileResponse => {
+            console.log(copyFileResponse);
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }
 
 
