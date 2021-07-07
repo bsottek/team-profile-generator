@@ -36,7 +36,7 @@ Profile.prototype.promptEngineer = function () {
         ])
         .then(({ name, email, github, id }) => {
             this.employees.push(new Engineer(name, email, github, id));
-            this.promptAction()
+            return (this.promptAction());
         })
 }
 
@@ -66,7 +66,7 @@ Profile.prototype.promptIntern = function () {
         ])
         .then(({ name, email, school, id }) => {
             this.employees.push(new Intern(name, email, school, id));
-            this.promptAction();
+            return(this.promptAction());
         })
 }
 
@@ -111,24 +111,33 @@ Profile.prototype.promptAction = function() {
             }
         ])
         .then(({actionSelection}) => {
-            if (actionSelection === 'Enter engineer details'){
-                this.promptEngineer();
-            } else if (actionSelection === 'Enter intern details'){
-                this.promptIntern();
+            console.log(actionSelection);
+            if (actionSelection == 'Enter engineer details'){
+                return (this.promptEngineer());
+            } else if (actionSelection == 'Enter intern details'){
+                return(this.promptIntern());
             } else {
                 console.log('generating page');
                 console.log(this.employees);
-                // console.log(this.employees.filter(employee => employee.role === 'Manager'));
-                return generatePage(this.employees);
-                // return this.employees;
+                return(generatePage(this.employees)
+                    .then(writeFileResponse => {
+                        console.log(writeFileResponse.message);
+                        return copyFile();
+                    })
+                    .then(copyFileResponse => {
+                        console.log(copyFileResponse);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }));
             }
         })
-        .then(pageHTML => {
-            return writeFile(pageHTML);
-        })
-        .then(writeFileResponse => {
-            console.log(writeFileResponse);
-        })
+        // .then(writeFileResponse => {
+        //     console.log(writeFileResponse);
+        // })
+        // .catch((error) => {
+        //     console.log(error);
+        // })
 }
 
 

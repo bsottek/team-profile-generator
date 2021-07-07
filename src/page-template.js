@@ -1,9 +1,10 @@
+const { writeFile, copyFile } = require('../generate-site.js');
 
 const generatePage = (employees) => {
     // destructure page data by section
     // const { projects, about, ...header } = templateData;
     console.log('generatePage is working');
-    return `
+    return (writeFile(`
         <!DOCTYPE html>
   <html lang="en">
 
@@ -44,7 +45,7 @@ const generatePage = (employees) => {
     </footer>
   </body>
   </html>
-    `;
+    `));
 };
 
 const generateManager = employees => {
@@ -53,7 +54,7 @@ const generateManager = employees => {
         .filter(employee => employee.role === 'Manager')
         .map(({name, id, email, role, officeNumber}) => {
             return `
-        <div class = "col-2", "card", "text-white", "bg-dark", "mr-2", "mt-2">
+        <div class = "col-2, card, text-white, bg-dark, mr-2, mt-2">
             <div class= "card-header">
                 ${name}
                 ${role}
@@ -73,7 +74,7 @@ const generateEngineer = employees => {
             .filter(employee => employee.role === 'Engineer')
             .map(({ name, id, email, role, github }) => {
                 return `
-        <div class = "col-2", "card", "text-white", "bg-dark", "mr-2", "mt-2">
+        <div class = "col-2, card, text-white, bg-dark, mr-2, mt-2">
             <div class= "card-header">
                 ${name}
                 ${role}
@@ -93,7 +94,7 @@ const generateIntern = employees => {
             .filter(employee => employee.role === 'Intern')
             .map(({ name, id, email, role, school }) => {
                 return `
-        <div class = "col-2", "card", "text-white", "bg-dark", "mr-2", "mt-2">
+        <div class = "col-2, card, text-white, bg-dark, mr-2, mt-2">
             <div class= "card-header">
                 ${name}
                 ${role}
